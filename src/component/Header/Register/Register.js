@@ -9,20 +9,25 @@ const Register = ({closeModal}) => {
     const [passwordAgain, setPasswordAgain] = useState('');
 
     const handleRegisterFormSubmit = (event) => {
-        event.preventDefault();
-        axios.post('http://127.0.0.1:8000/api/register/', {
-            username: username,
-            email: email,
-            password: password,
-            password_again: passwordAgain
-        })
-            .then(response => {
+            event.preventDefault();
+            axios.post('http://127.0.0.1:8000/api/register/', JSON.stringify({
+                    username: username,
+                    email: email,
+                    password: password,
+                    password_again: passwordAgain
+                }), {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ).then(response => {
                 console.log('User registered successfully:', response.data);
             })
-            .catch(error => {
-                console.error('Failed to register user:', error);
-            });
-    };
+                .catch(error => {
+                    console.error('Failed to register user:', error);
+                });
+        }
+    ;
 
     return (
         <div>
