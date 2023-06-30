@@ -10,12 +10,6 @@ const Register = ({closeModal}) => {
 
     const handleRegisterFormSubmit = (event) => {
         event.preventDefault();
-
-        if (password !== passwordAgain) {
-            console.error('Passwords do not match');
-            return;
-        }
-
         axios.post('http://127.0.0.1:8000/api/register/', {
             username: username,
             email: email,
