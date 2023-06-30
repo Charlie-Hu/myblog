@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Content.css"
+import InputBox from "./InputBox/InputBox";
 
 function Content(props) {
     return (<div className="content">
@@ -25,17 +26,17 @@ function Content(props) {
             members.
         </p>
         <h3 className='subheader' id="skill overview">Skill Overview</h3>
-        <p>
-            <ul>
-                <li>Front-end: HTML, CSS, Javascript, Jquery, React</li>
-                <li>Back-end: Django, Flask</li>
-                <li>Database: MySQL, sqlite, MongoDB</li>
-                <li>Cloud Service: AWS</li>
-                <li>Programming Language: Python(main), R language, Java, C, bash</li>
-                <li>Version Control: Git</li>
-                <li>Data Analysis: Machine learning, scikit-learn, PowerBI</li>
-            </ul>
-        </p>
+
+        <ul>
+            <li>Front-end: HTML, CSS, Javascript, Jquery, React</li>
+            <li>Back-end: Django, Flask</li>
+            <li>Database: MySQL, sqlite, MongoDB</li>
+            <li>Cloud Service: AWS</li>
+            <li>Programming Language: Python(main), R language, Java, C, bash</li>
+            <li>Version Control: Git</li>
+            <li>Data Analysis: Machine learning, scikit-learn, PowerBI</li>
+        </ul>
+
         <h3 className='subheader' id="education">EDUCATION</h3>
         <p>
             Bachelor of Information Technology 2018 - 2020
@@ -84,7 +85,9 @@ function Content(props) {
             Developed the user login, register and game ranking features.
             Applied Git for version control and collaboration.
         </p>
-
+        <hr/>
+        <h1 id='comment'>Comment</h1>
+        <InputBox></InputBox>
     </div>);
 }
 

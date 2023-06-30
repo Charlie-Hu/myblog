@@ -15,7 +15,7 @@ function Sidebar() {
             </div>
             <div className="sidebar-widget">
                 <h4>Experience</h4>
-                <ul>
+                <ol>
                     <li><a href="#decarbonising">
                         DECARBONISING WASTEWATER TREATMENT WEB APP
                     </a></li>
@@ -25,7 +25,12 @@ function Sidebar() {
                     <li><a href="#sokoban">
                         SOKOBAN FLASK PROJECT
                     </a></li>
-                </ul>
+                </ol>
+                <h4>
+                    <a href="#comment">
+                        Comment
+                    </a>
+                </h4>
             </div>
         </aside>
     );

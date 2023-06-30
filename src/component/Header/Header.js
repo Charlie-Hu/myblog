@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
-import './Header.css'
+import './Header.css';
+import Login from "./Login/Login";
+import Register from "./Register/Register";
 
 const Header = () => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
     const handleMouseEnter = () => {
         setIsExpanded(true);
@@ -12,8 +16,24 @@ const Header = () => {
         setIsExpanded(false);
     };
 
+    const handleLoginClick = () => {
+        setIsLoginModalOpen(true);
+    };
+
+    const handleRegisterClick = () => {
+        setIsRegisterModalOpen(true);
+    };
+
+    const closeLoginModal = () => {
+        setIsLoginModalOpen(false);
+    };
+
+    const closeRegisterModal = () => {
+        setIsRegisterModalOpen(false);
+    };
+
     return (
-        <header className='header'>
+        <header className={'header'}>
             <div className="left-section">
                 <div
                     className="contact-button"
@@ -36,9 +56,30 @@ const Header = () => {
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About</a></li>
+                        <li>
+                            <button onClick={handleLoginClick}>Login</button>
+                        </li>
+                        <li>
+                            <button onClick={handleRegisterClick}>Register</button>
+                        </li>
                     </ul>
                 </nav>
             </div>
+            {isLoginModalOpen && (
+                <div className="modal-overlay">
+                    <Login closeModal={closeLoginModal}/>
+                </div>
+            )}
+
+            {isRegisterModalOpen && (
+                <div className="modal-overlay">
+                    <Register closeModal={closeRegisterModal}/>
+                </div>
+            )}
+
+            {(isLoginModalOpen || isRegisterModalOpen) && (
+                <div className={`overlay ${isLoginModalOpen || isRegisterModalOpen ? 'active' : ''}`} />
+            )}
         </header>
     );
 };
