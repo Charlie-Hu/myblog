@@ -22,6 +22,7 @@ const Register = ({closeModal}) => {
                 }
             ).then(response => {
                 console.log('User registered successfully:', response.data);
+
             })
                 .catch(error => {
                     console.error('Failed to register user:', error);
