@@ -22,4 +22,10 @@
 
 .login-form {
   text-align: center;
+  overflow: auto;
+}
+
+.errorLine{
+  /*float: right;*/
+  color: red;
 }

@@ -1,39 +1,41 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
+import Login from './Login/Login';
+import Register from './Register/Register';
 import './Header.css';
-import Login from "./Login/Login";
-import Register from "./Register/Register";
 
-const Header = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+const Header = ({
+  isLoginModalOpen,
+  isRegisterModalOpen,
+  isHeaderExpanded,
+  dispatch,
+}) => {
+  const handleMouseEnter = () => {
+    dispatch({ type: 'EXPAND_HEADER' });
+  };
 
-    const handleMouseEnter = () => {
-        setIsExpanded(true);
-    };
+  const handleMouseLeave = () => {
+    dispatch({ type: 'COLLAPSE_HEADER' });
+  };
 
-    const handleMouseLeave = () => {
-        setIsExpanded(false);
-    };
+  const handleLoginClick = () => {
+    dispatch({ type: 'OPEN_LOGIN_MODAL' });
+  };
 
-    const handleLoginClick = () => {
-        setIsLoginModalOpen(true);
-    };
+  const handleRegisterClick = () => {
+    dispatch({ type: 'OPEN_REGISTER_MODAL' });
+  };
 
-    const handleRegisterClick = () => {
-        setIsRegisterModalOpen(true);
-    };
+  const closeLoginModal = () => {
+    dispatch({ type: 'CLOSE_LOGIN_MODAL' });
+  };
 
-    const closeLoginModal = () => {
-        setIsLoginModalOpen(false);
-    };
-
-    const closeRegisterModal = () => {
-        setIsRegisterModalOpen(false);
-    };
+  const closeRegisterModal = () => {
+    dispatch({ type: 'CLOSE_REGISTER_MODAL' });
+  };
 
     return (
-        <header className={'header'}>
+        <header className="header">
             <div className="left-section">
                 <div
                     className="contact-button"
@@ -42,7 +44,7 @@ const Header = () => {
                 >
                     Contact me
                 </div>
-                {isExpanded && (
+                {isHeaderExpanded && (
                     <div className="contact-info">
                         <p>Email: puputoo6473@gmail.com</p>
                         <p>Phone: 0416493134</p>
@@ -78,10 +80,15 @@ const Header = () => {
             )}
 
             {(isLoginModalOpen || isRegisterModalOpen) && (
-                <div className={`overlay ${isLoginModalOpen || isRegisterModalOpen ? 'active' : ''}`} />
+                <div className={`overlay ${isLoginModalOpen || isRegisterModalOpen ? 'active' : ''}`}/>
             )}
         </header>
     );
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+    isLoginModalOpen: state.header.isLoginModalOpen,
+    isRegisterModalOpen: state.header.isRegisterModalOpen,
+    isHeaderExpanded: state.header.isHeaderExpanded,
+});
+export default connect(mapStateToProps)(Header);
