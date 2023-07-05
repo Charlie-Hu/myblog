@@ -23,3 +23,8 @@
 .login-form {
   text-align: center;
 }
+
+.errorLine{
+  /*float: right;*/
+  color: red;
+}
