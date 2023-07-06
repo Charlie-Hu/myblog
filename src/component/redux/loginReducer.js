@@ -2,6 +2,7 @@ const initialState = {
     login: false,
     error: '',
     username: '',
+    isErrorShow: false,
 };
 
 const registerReducer = (state = initialState, action) => {
@@ -14,13 +15,26 @@ const registerReducer = (state = initialState, action) => {
         case 'LOGIN_SUCCESS_USER':
             return {
                 ...state,
-               username: action.payload,
+                username: action.payload,
             };
         case 'LOGIN_ERROR':
             return {
                 ...state,
                 error: action.payload,
+                isErrorShow: true,
             };
+        case'ERROR RESET':
+            return {
+                ...state,
+                isErrorShow: false,
+            }
+        case'LOGOUT':
+            sessionStorage.clear()
+            return {
+                ...state,
+                username: sessionStorage.key(0),
+                login: false,
+            }
         default:
             return state;
     }

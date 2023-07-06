@@ -3,7 +3,7 @@ import {connect, useDispatch} from 'react-redux';
 import "./Login.css";
 import axios from "axios";
 
-const Login = ({closeModal, loginSuccess, loginError, dispatch}) => {
+const Login = ({closeModal, loginSuccess, loginError, isErrorShow, dispatch}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -28,16 +28,22 @@ const Login = ({closeModal, loginSuccess, loginError, dispatch}) => {
             });
     };
     useEffect(() => {
+        const initialSession=sessionStorage.key(0)
         if (loginSuccess) {
             const currentTime = new Date().toString();
             sessionStorage.setItem(username, currentTime);
             console.log(loginSuccess)
-            closeModal();
+            handleClose();
         }
-        else{
-            console.log(loginError)
+        if(initialSession!==null){
         }
     }, [loginSuccess, closeModal]);
+
+    function handleClose() {
+        closeModal();
+        dispatch({type:'ERROR RESET'})
+    }
+
     return (
         <div>
             <div className="modal">
@@ -59,9 +65,9 @@ const Login = ({closeModal, loginSuccess, loginError, dispatch}) => {
                         onChange={e => setPassword(e.target.value)}
                     />
                     <br/><br/>
-                    <div className="errorLine">{loginError}</div>
-                    <button className="form-button" onClick={closeModal}>Close</button>
+                    {isErrorShow && <div className="errorLine">{loginError}</div>}
                     <button type="submit" className="form-button">Submit</button>
+                    <button className="form-button" onClick={handleClose}>Close</button>
                 </form>
             </div>
         </div>
@@ -70,6 +76,7 @@ const Login = ({closeModal, loginSuccess, loginError, dispatch}) => {
 const mapStateToProps = (state) => ({
     loginSuccess: state.login.login,
     username: state.login.username,
-    loginError: state.login.error
+    loginError: state.login.error,
+    isErrorShow: state.login.isErrorShow,
 });
 export default connect(mapStateToProps)(Login);

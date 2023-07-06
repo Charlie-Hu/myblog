@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import './Register.css';
 import axios from 'axios';
 
-const Register = ({closeModal, registerSuccess, registerError, dispatch}) => {
+const Register = ({closeModal, registerSuccess, registerError, isErrorShow, dispatch}) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -37,10 +37,14 @@ const Register = ({closeModal, registerSuccess, registerError, dispatch}) => {
     // console.log(registerSuccess)
     useEffect(() => {
         if (registerSuccess) {
-
-            closeModal();
+            handleClose()
         }
     }, [registerSuccess, closeModal]);
+
+    function handleClose() {
+        closeModal();
+        dispatch({type:'ERROR RESET'})
+    }
 
     return (
         <div>
@@ -82,12 +86,12 @@ const Register = ({closeModal, registerSuccess, registerError, dispatch}) => {
                         onChange={(e) => setPasswordAgain(e.target.value)}
                     />
                     <br/>
-                    <div className="errorLine">{registerError}</div>
-                    <button className="form-button" onClick={closeModal}>
-                        Close
-                    </button>
+                    {isErrorShow && <div className="errorLine">{registerError}</div>}
                     <button type="submit" className="form-button">
                         Submit
+                    </button>
+                    <button className="form-button" onClick={handleClose}>
+                        Close
                     </button>
                 </form>
             </div>
@@ -98,6 +102,7 @@ const Register = ({closeModal, registerSuccess, registerError, dispatch}) => {
 const mapStateToProps = (state) => ({
     registerSuccess: state.register.success,
     registerError: state.register.errorinfo,
+    isErrorShow: state.register.isErrorShow,
 });
 
 export default connect(mapStateToProps)(Register);

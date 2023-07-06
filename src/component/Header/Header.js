@@ -1,39 +1,43 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import './Header.css';
 
-const Header = ({
-  isLoginModalOpen,
-  isRegisterModalOpen,
-  isHeaderExpanded,
-  dispatch,
-}) => {
-  const handleMouseEnter = () => {
-    dispatch({ type: 'EXPAND_HEADER' });
-  };
+const Header = ({isLoginModalOpen, isRegisterModalOpen, isHeaderExpanded, username, isLogin, dispatch}) => {
+    const handleMouseEnter = () => {
+        dispatch({type: 'EXPAND_HEADER'});
+    };
 
-  const handleMouseLeave = () => {
-    dispatch({ type: 'COLLAPSE_HEADER' });
-  };
+    const handleMouseLeave = () => {
+        dispatch({type: 'COLLAPSE_HEADER'});
+    };
 
-  const handleLoginClick = () => {
-    dispatch({ type: 'OPEN_LOGIN_MODAL' });
-  };
+    const handleLoginClick = () => {
+        dispatch({type: 'OPEN_LOGIN_MODAL'});
+    };
 
-  const handleRegisterClick = () => {
-    dispatch({ type: 'OPEN_REGISTER_MODAL' });
-  };
+    const handleRegisterClick = () => {
+        dispatch({type: 'OPEN_REGISTER_MODAL'});
+    };
 
-  const closeLoginModal = () => {
-    dispatch({ type: 'CLOSE_LOGIN_MODAL' });
-  };
+    const closeLoginModal = () => {
+        dispatch({type: 'CLOSE_LOGIN_MODAL'});
+    };
 
-  const closeRegisterModal = () => {
-    dispatch({ type: 'CLOSE_REGISTER_MODAL' });
-  };
+    const closeRegisterModal = () => {
+        dispatch({type: 'CLOSE_REGISTER_MODAL'});
+    };
 
+    const handleLogout = () => {
+        dispatch({type: 'LOGOUT'})
+    }
+    useEffect(() => {
+    if (sessionStorage.key(0) !== null) {
+      dispatch({ type: 'LOGIN_SUCCESS', payload: true });
+      dispatch({ type: 'LOGIN_SUCCESS_USER', payload: sessionStorage.key(0) });
+    }
+  }, []);
     return (
         <header className="header">
             <div className="left-section">
@@ -59,7 +63,9 @@ const Header = ({
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About</a></li>
                         <li>
-                            <button onClick={handleLoginClick}>Login</button>
+                            {isLogin ? <div>{username}&nbsp;&nbsp;&nbsp;
+                                <button onClick={handleLogout}>Log out</button>
+                            </div> : <button onClick={handleLoginClick}>Login</button>}
                         </li>
                         <li>
                             <button onClick={handleRegisterClick}>Register</button>
@@ -90,5 +96,7 @@ const mapStateToProps = (state) => ({
     isLoginModalOpen: state.header.isLoginModalOpen,
     isRegisterModalOpen: state.header.isRegisterModalOpen,
     isHeaderExpanded: state.header.isHeaderExpanded,
+    username: state.login.username,
+    isLogin: state.login.login,
 });
 export default connect(mapStateToProps)(Header);
