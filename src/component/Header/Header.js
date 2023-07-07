@@ -60,15 +60,13 @@ const Header = ({isLoginModalOpen, isRegisterModalOpen, isHeaderExpanded, userna
                 <div className="logo">Charlie want to be web/software developer</div>
                 <nav className="horizontal-menu">
                     <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/about">About</a></li>
                         <li>
                             {isLogin ? <div>{username}&nbsp;&nbsp;&nbsp;
-                                <button onClick={handleLogout}>Log out</button>
-                            </div> : <button onClick={handleLoginClick}>Login</button>}
+                                <button className='button-style-logout' onClick={handleLogout}>Log out</button>
+                            </div> : <button className='button-style' onClick={handleLoginClick}>Login</button>}
                         </li>
                         <li>
-                            <button onClick={handleRegisterClick}>Register</button>
+                            <button className='button-style' onClick={handleRegisterClick}>Register</button>
                         </li>
                     </ul>
                 </nav>

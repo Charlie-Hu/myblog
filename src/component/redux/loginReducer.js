@@ -5,7 +5,7 @@ const initialState = {
     isErrorShow: false,
 };
 
-const registerReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
             return {
@@ -40,4 +40,4 @@ const registerReducer = (state = initialState, action) => {
     }
 };
 
-export default registerReducer;
+export default loginReducer;

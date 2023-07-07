@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Content.css"
 import InputBox from "./InputBox/InputBox";
+import CommentSection from "./ComentSection/CommentSection";
 
 function Content(props) {
     return (<div className="content">
@@ -9,7 +10,7 @@ function Content(props) {
             Since I haven't found a development-related job for half a year after graduation, I specially made
             this website for practice. If you have a job opportunity, please contact me. As a graduate, I don't
             care about salary. I have 820 visa, I can get pr immediately, I don't need employer guarantee (it
-            will change after finding a job). Will continue to update the function。
+            will change after finding a job). Will continue to update the function.
         </p>
         <h1>Personal Detail</h1>
         <h3 className='subheader' id="profile">Profile</h3>
@@ -88,6 +89,8 @@ function Content(props) {
         <hr/>
         <h1 id='comment'>Comment</h1>
         <InputBox></InputBox>
+        <br/>
+        {/*<CommentSection></CommentSection>*/}
     </div>);
 }
 

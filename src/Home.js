@@ -6,7 +6,7 @@ import "./Home.css"
 
 function App(props) {
     return (
-        <div>
+        <div className='wholeApp'>
             <div className='topside'>
                 <Header></Header>
             </div>

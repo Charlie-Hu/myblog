@@ -59,14 +59,27 @@
 .overlay.active {
   pointer-events: auto;
 }
-/*.modal-container {*/
-/*  position: fixed;*/
-/*  width: 400px;*/
-/*  height: 200px;*/
-/*  top: 50%;*/
-/*  left: 50%;*/
-/*  transform: translate(-50%, -50%);*/
-/*  background-color: white;*/
-/*  z-index: 1000;*/
-/*  pointer-events: auto;*/
-/*}*/
+
+.button-style-logout {
+    width: 100px;
+    height: 40px;
+    background-color: #e35f5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer
+}
+
+.button-style {
+    width: 100px;
+    height: 40px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer
+}
